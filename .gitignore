@@ -39,3 +39,4 @@ next-env.d.ts
 #Notion_db
 /Notion_DB
 /public/docs/*
+db/weaviate/weaviate/*

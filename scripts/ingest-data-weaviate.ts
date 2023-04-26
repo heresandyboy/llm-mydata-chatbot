@@ -1,7 +1,7 @@
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import { WeaviateStore } from 'langchain/vectorstores/weaviate';
-import { client } from '@/utils/weaviate-client';
+import { initWeaviate } from '@/utils/weaviate-client';
 import { CustomPDFLoader } from '@/utils/customPDFLoader';
 import { WEAVIATE_INDEX_NAME } from '@/config/weaviate';
 import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
@@ -53,6 +53,7 @@ export const run = async () => {
     console.log('creating vector store...');
     /*create and store the embeddings in the vectorStore*/
     const embeddings = new OpenAIEmbeddings();
+    const client = await initWeaviate();
 
     //embed the PDF documents
     const store = await WeaviateStore.fromDocuments(
@@ -92,7 +93,7 @@ export const run = async () => {
   }
 };
 
-(async () => {
-  await run();
-  console.log('ingestion complete');
-})();
+// (async () => {
+//   await run();
+//   console.log('ingestion complete');
+// })();

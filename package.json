@@ -12,7 +12,9 @@
     "type-check": "tsc --noEmit",
     "lint": "eslint --ignore-path .gitignore \"**/*.+(ts|js|tsx)\"",
     "format": "prettier --ignore-path .gitignore \"**/*.+(ts|js|tsx)\" --write",
-    "ingest": "tsx -r dotenv/config scripts/ingest-data.ts"
+    "ingest": "tsx -r dotenv/config scripts/ingest-data.ts",
+    "wv-up": "sh db/weaviate/run.sh",
+    "wv-logs": "sh db/weaviate/logs.sh"
   },
   "dependencies": {
     "@microsoft/fetch-event-source": "^2.0.1",

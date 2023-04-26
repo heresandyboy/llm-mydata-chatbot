@@ -1,0 +1,1 @@
+docker-compose -f ./db/weaviate/docker-compose.yml logs

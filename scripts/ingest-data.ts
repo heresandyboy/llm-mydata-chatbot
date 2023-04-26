@@ -1,30 +1,23 @@
 import { run as runPinecone } from './ingest-data-pinecone';
 import { run as runWeaviate } from './ingest-data-weaviate';
+import { USE_PINECONE } from '@/config/pinecone';
+import { USE_WEAVIATE } from '@/config/weaviate';
 
-const usePinecone = process.env.USE_PINECONE === 'true';
-const useWeaviate = process.env.USE_WEAVIATE === 'true';
-
-if (usePinecone && useWeaviate) {
+if (USE_PINECONE && USE_WEAVIATE) {
   throw new Error(
     'Please set only one of USE_PINECONE or USE_WEAVIATE to true',
   );
 }
 
-if (!usePinecone && !useWeaviate) {
+if (!USE_PINECONE && !USE_WEAVIATE) {
   throw new Error('Please set one of USE_PINECONE or USE_WEAVIATE to true');
 }
 
 const run = async () => {
-  if (usePinecone) {
-    if (!process.env.PINECONE_ENVIRONMENT || !process.env.PINECONE_API_KEY) {
-      throw new Error('Pinecone environment or api key vars missing');
-    }
+  if (USE_PINECONE) {
     console.log('Selected Pinecone');
     await runPinecone();
-  } else if (useWeaviate) {
-    if (!process.env.WEAVIATE_HOST || !process.env.WEAVIATE_SCHEME) {
-      throw new Error('Weaviate environment or api key vars missing');
-    }
+  } else if (USE_WEAVIATE) {
     console.log('Selected Weaviate');
     await runWeaviate();
   }
