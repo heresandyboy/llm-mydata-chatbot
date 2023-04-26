@@ -1,9 +1,5 @@
 import weaviate, { WeaviateClient } from 'weaviate-ts-client';
 
-if (!process.env.WEAVIATE_HOST || !process.env.WEAVIATE_SCHEME) {
-  throw new Error('Weaviate environment or api key vars missing');
-}
-
 async function initWeaviate() {
   try {
     const client: WeaviateClient = weaviate.client({
